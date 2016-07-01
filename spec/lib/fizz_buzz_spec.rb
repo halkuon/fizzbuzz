@@ -1,5 +1,4 @@
 require 'rails_helper'
-require_relative '../../lib/fizz_buzz.rb'
 
 describe FizzBuzz do
   describe '#divisible_by_15?' do
