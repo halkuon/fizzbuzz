@@ -19,7 +19,6 @@ describe Api::V1::FavouritesController, type: :controller do
     context 'when number is passed in params' do
       it 'marks number as favourite' do
         post :create, format: :json, number: 3
-        json = JSON.parse(response.body)
         expect(response).to be_success
         expect(Favourite.last.number).to eq(3)
       end
@@ -42,7 +41,6 @@ describe Api::V1::FavouritesController, type: :controller do
       it 'deletes number marked as favourite' do
         expect(Favourite.last.number).to eq(1)
         delete :destroy, format: :json, id: 1
-        json = JSON.parse(response.body)
         expect(response).to be_success
         expect(Favourite.find_by_id(1)).to be_nil
       end
@@ -51,7 +49,6 @@ describe Api::V1::FavouritesController, type: :controller do
     context 'when number is not passed in params' do
       it 'returns error' do
         delete :destroy, format: :json, id: 'a'
-        json = JSON.parse(response.body)
         expect(response.status).to eq(422)
         expect(Favourite.last.number).to eq(1)
       end
