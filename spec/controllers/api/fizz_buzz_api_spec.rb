@@ -8,6 +8,13 @@ describe Api::V1::FizzBuzzController, type: :controller do
     expect(json[99]).to eq([100, "Buzz"])
   end
 
+  it 'returns first 100 number when empty string param' do
+    get :index, {page: "", page_size: "", max: ""}
+    json = JSON.parse(response.body)
+    expect(response).to be_success
+    expect(json[99]).to eq([100, "Buzz"])
+  end
+
   it 'responds to max parameter' do
     get :index, {max: 20}, format: :json
     json = JSON.parse(response.body)

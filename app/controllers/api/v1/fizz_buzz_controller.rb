@@ -24,12 +24,12 @@ module Api
       end
 
       def set_page_size
-        @page = params[:page] || 1
-        @page_size = params[:page_size] || PAGE_SIZE
+        @page = (params[:page] if params[:page].present?) || 1
+        @page_size = (params[:page_size] if params[:page_size].present?) || PAGE_SIZE
       end
 
       def determine_limits
-        @max = params[:max] || MAXIMUM
+        @max = (params[:max] if params[:max].present?) || MAXIMUM
         @max = ABS_MAX if @max.to_i > ABS_MAX
       end
 
