@@ -20,7 +20,7 @@ describe Api::V1::FizzBuzzController, type: :controller do
     expect(json[0]).to eq([101, nil])
   end
 
-  it 'responds to page parameter' do
+  it 'responds to page size parameter' do
     get :index, {page_size: 15}, format: :json
     json = JSON.parse(response.body)
     expect(json[14]).to eq([15, 'FizzBuzz'])

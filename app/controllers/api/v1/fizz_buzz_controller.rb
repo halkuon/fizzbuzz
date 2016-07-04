@@ -3,11 +3,14 @@ module Api
     class FizzBuzzController < ApplicationController
       def index
         set_params
-
         results = (1..@max.to_i).map { |x| [x, FizzBuzz.check_value(x)] }
         response = results.paginate(page: @page.to_i, per_page: @page_size.to_i)
 
-        render json: response.to_json
+        if response = response.to_json
+          render json: response
+        else
+          render json: {}, status: 422
+        end
       end
 
       private

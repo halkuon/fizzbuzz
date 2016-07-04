@@ -17,7 +17,7 @@ module Api
       end
 
       def destroy
-        fav = Favourite.find_by_id(params[:id])
+        fav = Favourite.find_by_number(params[:id])
         if fav.present? && fav.destroy
           render json: {}, status: 200
         else
