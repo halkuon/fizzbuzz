@@ -1,5 +1,6 @@
 module Api
   module V1
+    # Retrieve a list of favourites, create and destroy
     class FavouritesController < ApplicationController
       def index
         favourites_list = Favourite.all

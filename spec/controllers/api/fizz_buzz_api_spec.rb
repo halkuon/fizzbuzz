@@ -31,4 +31,11 @@ describe Api::V1::FizzBuzzController, type: :controller do
     json = JSON.parse(response.body)
     expect(json[2]).to eq([183, 'Fizz'])
   end
+
+  it 'returns error when bad parameter passed' do
+    get :index, {page: 'abcd'}, format: :json
+    json = JSON.parse(response.body)
+    expect(response.status).to eq(422)
+    expect(json[0]).to eq({})
+  end
 end

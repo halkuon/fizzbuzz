@@ -1,16 +1,19 @@
 module Api
   module V1
+    # Returns a list of numbers depending on params and matching FizzBuzz values
     class FizzBuzzController < ApplicationController
       def index
         set_params
         results = (1..@max.to_i).map { |x| [x, FizzBuzz.check_value(x)] }
-        response = results.paginate(page: @page.to_i, per_page: @page_size.to_i)
 
-        if response = response.to_json
-          render json: response
-        else
-          render json: {}, status: 422
-        end
+        response = begin
+                     status = 200
+                     results.paginate(page: @page.to_i, per_page: @page_size.to_i)
+                   rescue
+                     status = 422
+                     [{}]
+                   end
+        render json: response.to_json, status: status
       end
 
       private
